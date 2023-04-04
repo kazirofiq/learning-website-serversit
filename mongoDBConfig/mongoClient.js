@@ -8,9 +8,10 @@ async function connect() {
         client = await MongoClient.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 })
         .catch(err => { console.log(err); });
     }
+    
     return client;
 }
 
 const getConectedClient = () => client;  
 
-module.exports = { connect, getConectedClient }
+module.exports = { connect, client: getConectedClient }
