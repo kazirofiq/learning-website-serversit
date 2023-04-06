@@ -21,10 +21,16 @@ const deleteDoc = (req, collection) => collection().deleteOne({
     _id: new ObjectId(req.params.id)
 })
 
+// query to delete a mongodb document
+const readOneDoc = (req, collection) => collection().findOne({
+    _id: new ObjectId(req.params.id)
+})
+
 
 module.exports = {
     createDoc,
     readDoc,
     updateDoc,
     deleteDoc,
+    readOneDoc,
 }

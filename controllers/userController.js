@@ -1,5 +1,5 @@
 const { usersCollection } = require("../mongoDBConfig/collections")
-const { readDoc, createDoc, updateDoc, deleteDoc } = require("../utils/mongoQueries")
+const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../utils/mongoQueries")
 
 const getAllUsers = async (req, res) => {
     const users = await readDoc(usersCollection)
@@ -25,9 +25,16 @@ const deleteUser = async (req, res) => {
     res.send(result)
 }
 
+const getAUser = async (req, res) => {
+    const result = await readOneDoc(req, usersCollection)
+
+    res.send(result || {})
+}
+
 module.exports = {
     getAllUsers,
     saveUser,
     updateUser,
     deleteUser,
+    getAUser,
 }
