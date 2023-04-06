@@ -1,6 +1,6 @@
 const express = require("express")
 const cors = require("cors")
-const router = require("./routes/userRouter")
+const userRouter = require("./routes/userRouter")
 const { connect } = require("./mongoDBConfig/mongoClient")
 
 const port = process.env.PORT || 5000
@@ -13,7 +13,10 @@ app.use(express.json())
 
 connect()
     .then(() => {
-        app.use("/users", router)
+        // users routes
+        app.use("/users", userRouter)
+        // courses routes
+        // app.use("/courses", router)
     })
     .catch(err => console.log(err))
 

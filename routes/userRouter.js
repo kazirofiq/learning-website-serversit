@@ -1,7 +1,20 @@
-const { getAllUsers } = require("../controllers/userController")
+const { getAllUsers, saveUser, updateUser, deleteUser } = require("../controllers/userController")
 
-const router = require("express").Router()
+const userRouter = require("express").Router()
 
-router.get("/", getAllUsers)
+// get all users
+userRouter.get("/", getAllUsers)
 
-module.exports = router
+// save a user
+userRouter.post("/", saveUser)
+
+// update a user by uid
+userRouter.patch("/:id", updateUser)
+
+// delete a user by uid
+userRouter.delete("/:id", deleteUser)
+
+// get a user by uid
+// userRouter.post("/:id", getAUser)
+
+module.exports = userRouter
