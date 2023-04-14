@@ -4,6 +4,7 @@ const userRouter = require("./routes/userRouter")
 const { connect } = require("./mongoDBConfig/mongoClient")
 const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
+const uploadRouter = require("./routes/uploadVdoRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -23,6 +24,9 @@ connect()
 
         // reviews routes
         app.use("/reviews", reviewsRouter)
+
+        // video upload to vdocipher routes
+        app.use("/upload-video", uploadRouter)
     })
     .catch(err => console.log(err))
 
