@@ -5,6 +5,7 @@ const { connect } = require("./mongoDBConfig/mongoClient")
 const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const uploadRouter = require("./routes/uploadVdoRouter")
+const jwtRouter = require("./routes/jwtRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -27,6 +28,9 @@ connect()
 
         // video upload to vdocipher routes
         app.use("/upload-video", uploadRouter)
+        
+        // JWT Verify
+        app.use("/jwt",jwtRouter)
     })
     .catch(err => console.log(err))
 
