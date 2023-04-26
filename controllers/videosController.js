@@ -1,12 +1,8 @@
 const fs = require("fs");
 const request = require("request");
-const multipart = require('connect-multiparty');
-require("dotenv").config()
+// require("dotenv").config()
 
-const uploadRouter = require("express").Router()
-const multipartMiddleware = multipart();
-
-uploadRouter.post("/", multipartMiddleware, (req, res) => {
+const uploadVideo = (req, res) => {
     const get_credentials_options = {
         method: "PUT",
         url: "https://dev.vdocipher.com/api/videos",
@@ -42,9 +38,48 @@ uploadRouter.post("/", multipartMiddleware, (req, res) => {
 
         request(upload_options, function (error, response, body) {
             if (error) throw new Error(error);
-            res.send({statusCode: response.statusCode, videoId});
+
+            res.send({ statusCode: response.statusCode, videoId });
         });
     });
-});
+}
 
-module.exports = uploadRouter
+const getVideoStatus = (req, res) => {
+    const options = {
+        method: "GET",
+        url: `https://dev.vdocipher.com/api/videos/${req.params.id}`,
+        headers: { Authorization: `Apisecret ${process.env.VDOCIPHER_API_SECRET}`, Accept: "application/json" },
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+        res.send(body);
+    });
+}
+
+const getAVideo = (req, res) => {
+    const options = {
+        method: "POST",
+        url: `https://dev.vdocipher.com/api/videos/${req.params.id}/otp`,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Apisecret ${process.env.VDOCIPHER_API_SECRET}`,
+        },
+        body: { ttl: 300 },
+        json: true,
+    };
+
+    request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+
+        console.log(body);
+        res.send(body)
+    });
+}
+
+module.exports = {
+    uploadVideo,
+    getVideoStatus,
+    getAVideo,
+}
