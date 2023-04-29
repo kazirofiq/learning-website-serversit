@@ -6,6 +6,7 @@ const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
 const jwtRouter = require("./routes/jwtRouter")
+const paymentRouter = require("./routes/paymentRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -30,9 +31,16 @@ connect()
         app.use("/videos", videosRouter)
         
         // JWT Verify
-        app.use("/jwt",jwtRouter)
+        app.use("/jwt", jwtRouter)
+        
+        // JWT Verify
+        app.use("/payment", paymentRouter)
     })
     .catch(err => console.log(err))
+
+app.post("/suc", (req, res) => {
+    res.send({r: req.body})
+})
 
 app.get("/", (req, res) => {
     res.send("Learn With Rakib server is running")
