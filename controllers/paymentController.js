@@ -1,6 +1,7 @@
 const SSLCommerzPayment = require('sslcommerz-lts')
 const store_id = process.env.SSLCOMMERZ_STORE_ID
 const store_passwd = process.env.SSLCOMMERZ_STORE_PASS
+const server = process.env.SERVER
 const is_live = false
 
 const makePayment = async (req, res) => {
@@ -8,10 +9,10 @@ const makePayment = async (req, res) => {
         total_amount: 100,
         currency: 'BDT',
         tran_id: 'REF123', // use unique tran_id for each api call
-        success_url: 'http://localhost:5000/suc',
-        fail_url: 'http://localhost:5000/payment/fail',
-        cancel_url: 'http://localhost:5000/payment/cancel',
-        ipn_url: 'http://localhost:5000/payment/ipn',
+        success_url: `${server}/payment/success`,
+        fail_url: `${server}/payment/fail`,
+        cancel_url: `${server}/payment/cancel`,
+        ipn_url: `${server}/payment/ipn`,
         shipping_method: 'Courier',
         product_name: 'Computer.',
         product_category: 'Electronic',
@@ -33,21 +34,17 @@ const makePayment = async (req, res) => {
         ship_state: 'Dhaka',
         ship_postcode: 1000,
         ship_country: 'Bangladesh',
-    };
+    }
     const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
     sslcz.init(data).then(apiResponse => {
-        // Redirect the user to payment gateway
-        req.app.set("mydata", data)
-        // console.log(apiResponse);
+        req.app.set("data", data)
         let GatewayPageURL = apiResponse.GatewayPageURL
         res.redirect(GatewayPageURL)
-        console.log('Redirecting to: ', GatewayPageURL)
-    });
-    // res.send({})
+    })
 }
 
 const paymentSuccess = async (req, res) => {
-    console.log(req.app.get('mydata'));
+    console.log(req.app.get('data'));
     res.send({r: req.mydata})
 }
 

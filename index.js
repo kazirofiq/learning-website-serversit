@@ -38,10 +38,6 @@ connect()
     })
     .catch(err => console.log(err))
 
-app.post("/suc", (req, res) => {
-    res.send({r: req.body})
-})
-
 app.get("/", (req, res) => {
     res.send("Learn With Rakib server is running")
 })
