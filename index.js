@@ -18,6 +18,7 @@ app.use(express.json())
 
 connect()
     .then(() => {
+
         // users routes
         app.use("/users", userRouter)
 
