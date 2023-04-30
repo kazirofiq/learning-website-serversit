@@ -5,6 +5,8 @@ const { connect } = require("./mongoDBConfig/mongoClient")
 const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
+const jwtRouter = require("./routes/jwtRouter")
+const paymentRouter = require("./routes/paymentRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -29,6 +31,12 @@ connect()
 
         // admin routes
         app.use("/admin", videosRouter)
+
+        // JWT Verify
+        app.use("/jwt", jwtRouter)
+
+        // JWT Verify
+        app.use("/payment", paymentRouter)
     })
     .catch(err => console.log(err))
 
