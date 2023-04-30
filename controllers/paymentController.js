@@ -9,7 +9,7 @@ const makePayment = async (req, res) => {
     const user = await usersCollection().findOne({ uid: req.query.uid })
 
     if (user) {
-        let amount = 15
+        let amount = 10000
         const coupon = await couponsCollection().findOne({
             value: req.query.couponId
         })
@@ -36,7 +36,7 @@ const makePayment = async (req, res) => {
             // cus_state: 'Dhaka',
             // cus_postcode: '1000',
             // cus_country: 'Bangladesh',
-            cus_phone: user.phone || '01',
+            cus_phone: user.phone,
             // cus_fax: '01306772769',
             // ship_name: 'Customer Name',
             // ship_add1: 'Dhaka',
