@@ -30,10 +30,19 @@ const getAUser = async (req, res) => {
     res.send(result || {})
 }
 
+const getAUserByUid = async (req, res) => {
+    const result = await usersCollection().findOne({
+        uid: req.query.uid
+    })
+
+    res.send(result || {})
+}
+
 module.exports = {
     getAllUsers,
     saveUser,
     updateUser,
     deleteUser,
     getAUser,
+    getAUserByUid,
 }
