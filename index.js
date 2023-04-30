@@ -7,6 +7,7 @@ const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
 const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
+const couponRouter = require("./routes/couponsRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -17,8 +18,12 @@ app.use(express.json())
 
 connect()
     .then(() => {
+
         // users routes
         app.use("/users", userRouter)
+
+        // payment
+        app.use("/payment", paymentRouter)
 
         // courses routes
         app.use("/courses", coursesRouter)
@@ -35,8 +40,8 @@ connect()
         // JWT Verify
         app.use("/jwt", jwtRouter)
 
-        // JWT Verify
-        app.use("/payment", paymentRouter)
+        // coupons routes
+        app.use("/coupons", couponRouter)
     })
     .catch(err => console.log(err))
 
