@@ -8,7 +8,6 @@ const videosRouter = require("./routes/videosRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
-// const connect = getConectedClient();
 
 // middlewares
 app.use(cors())
@@ -27,6 +26,9 @@ connect()
 
         // videos routes
         app.use("/videos", videosRouter)
+
+        // admin routes
+        app.use("/admin", videosRouter)
     })
     .catch(err => console.log(err))
 
