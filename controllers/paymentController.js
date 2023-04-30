@@ -10,7 +10,7 @@ const makePayment = async (req, res) => {
         currency: 'BDT',
         tran_id: 'REF123', // use unique tran_id for each api call
         success_url: `${server}/payment/success`,
-        fail_url: `${server}/payment/fail`,
+        fail_url: `${server}/payment/failure`,
         cancel_url: `${server}/payment/cancel`,
         ipn_url: `${server}/payment/ipn`,
         shipping_method: 'Courier',
@@ -44,8 +44,8 @@ const makePayment = async (req, res) => {
 }
 
 const paymentSuccess = async (req, res) => {
-    console.log(req.app.get('data'));
-    res.send({r: req.mydata})
+    // console.log(req.app.get('data'));
+    res.send({ r: req.mydata })
 }
 
 const paymentFailure = async (req, res) => {
