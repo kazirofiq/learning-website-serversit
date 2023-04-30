@@ -53,7 +53,6 @@ const makePayment = async (req, res) => {
 const paymentSuccess = async (req, res) => {
 
     const { tran_id } = req.app.get('data')
-    console.log(req.body);
     const data = {
         tran_id,
         status: "success"
@@ -75,7 +74,6 @@ const paymentCancel = async (req, res) => {
 }
 
 const paymentIpn = async (req, res) => {
-    console.log(req.body);
     res.redirect("http://localhost:3000/payment?status=ipn")
 }
 
