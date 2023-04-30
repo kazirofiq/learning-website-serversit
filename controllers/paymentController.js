@@ -9,7 +9,7 @@ const makePayment = async (req, res) => {
     const user = await usersCollection().findOne({ uid: req.query.uid })
 
     if (user) {
-        let amount = 10000
+        let amount = 15
         const coupon = await couponsCollection().findOne({
             value: req.query.couponId
         })
@@ -50,7 +50,6 @@ const makePayment = async (req, res) => {
         const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
 
         sslcz.init(data).then(apiResponse => {
-            console.log(apiResponse.GatewayPageURL);
             data.uid = user.uid
             req.app.set("data", data)
             let GatewayPageURL = apiResponse.GatewayPageURL
@@ -71,19 +70,19 @@ const paymentSuccess = async (req, res) => {
         { $set: { paidPremium: true } }
     )
     const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&')
-    res.redirect(`http://localhost:3000/payment?${queryString}`)
+    res.redirect(`https://learnwithrakib.pro/payment?${queryString}`)
 }
 
 const paymentFailure = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=failure")
+    res.redirect("https://learnwithrakib.pro/payment?status=failure")
 }
 
 const paymentCancel = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=cancelled")
+    res.redirect("https://learnwithrakib.pro/payment?status=cancelled")
 }
 
 const paymentIpn = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=ipn")
+    res.redirect("https://learnwithrakib.pro/payment?status=ipn")
 }
 
 
