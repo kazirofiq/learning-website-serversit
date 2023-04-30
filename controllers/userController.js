@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
 
 const saveUser = async (req, res) => {
     const result = await createDoc(req, usersCollection)
-
+    console.log(req.body);
     res.send(result)
 }
 
