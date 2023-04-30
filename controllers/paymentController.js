@@ -50,6 +50,7 @@ const makePayment = async (req, res) => {
         const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
 
         sslcz.init(data).then(apiResponse => {
+            console.log(apiResponse.GatewayPageURL);
             data.uid = user.uid
             req.app.set("data", data)
             let GatewayPageURL = apiResponse.GatewayPageURL
