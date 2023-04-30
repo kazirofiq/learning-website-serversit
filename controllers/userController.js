@@ -18,6 +18,18 @@ const updateUser = async (req, res) => {
 
     res.send(result)
 }
+const updateUserByUid = async (req, res) => {
+    const result = await usersCollection().updateOne(
+        {
+            uid: req.query.uid
+        },
+        {
+            $set: req.body
+        }
+    )
+
+    res.send(result)
+}
 
 const deleteUser = async (req, res) => {
     const result = await deleteDoc(req, usersCollection)
@@ -30,7 +42,6 @@ const getAUser = async (req, res) => {
 
     res.send(result || {})
 }
-
 const getAUserByUid = async (req, res) => {
     const result = await usersCollection().findOne({
         uid: req.query.uid
@@ -46,4 +57,5 @@ module.exports = {
     deleteUser,
     getAUser,
     getAUserByUid,
+    updateUserByUid,
 }
