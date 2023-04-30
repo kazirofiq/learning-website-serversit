@@ -20,6 +20,9 @@ connect()
         // users routes
         app.use("/users", userRouter)
 
+        // payment
+        app.use("/payment", paymentRouter)
+
         // courses routes
         app.use("/courses", coursesRouter)
 
@@ -34,9 +37,6 @@ connect()
 
         // JWT Verify
         app.use("/jwt", jwtRouter)
-
-        // JWT Verify
-        app.use("/payment", paymentRouter)
     })
     .catch(err => console.log(err))
 

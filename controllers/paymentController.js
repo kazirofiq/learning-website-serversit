@@ -2,11 +2,11 @@ const SSLCommerzPayment = require('sslcommerz-lts')
 const store_id = process.env.SSLCOMMERZ_STORE_ID
 const store_passwd = process.env.SSLCOMMERZ_STORE_PASS
 const server = process.env.SERVER
-const is_live = false
+const is_live = true
 
 const makePayment = async (req, res) => {
     const data = {
-        total_amount: 100,
+        total_amount: 05,
         currency: 'BDT',
         tran_id: 'REF123', // use unique tran_id for each api call
         success_url: `${server}/payment/success`,
@@ -25,8 +25,8 @@ const makePayment = async (req, res) => {
         cus_state: 'Dhaka',
         cus_postcode: '1000',
         cus_country: 'Bangladesh',
-        cus_phone: '01711111111',
-        cus_fax: '01711111111',
+        cus_phone: '01306772769',
+        cus_fax: '01306772769',
         ship_name: 'Customer Name',
         ship_add1: 'Dhaka',
         ship_add2: 'Dhaka',
@@ -36,6 +36,7 @@ const makePayment = async (req, res) => {
         ship_country: 'Bangladesh',
     }
     const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live)
+
     sslcz.init(data).then(apiResponse => {
         req.app.set("data", data)
         let GatewayPageURL = apiResponse.GatewayPageURL
@@ -44,23 +45,25 @@ const makePayment = async (req, res) => {
 }
 
 const paymentSuccess = async (req, res) => {
-    // console.log(req.app.get('data'));
-    res.send({ r: req.mydata })
+    const { tran_id } = req.app.get('data')
+    const data = {
+        tran_id,
+        status: "success"
+    }
+    const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&')
+    res.redirect(`http://localhost:3000/payment?${queryString}`)
 }
 
 const paymentFailure = async (req, res) => {
-
-    res.send({})
+    res.redirect("http://localhost:3000/payment?status=failure")
 }
 
 const paymentCancel = async (req, res) => {
-
-    res.send({})
+    res.redirect("http://localhost:3000/payment?status=cancelled")
 }
 
 const paymentIpn = async (req, res) => {
-
-    res.send({})
+    res.redirect("http://localhost:3000/payment?status=ipn")
 }
 
 
