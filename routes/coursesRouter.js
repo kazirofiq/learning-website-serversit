@@ -1,7 +1,6 @@
 const { getAllCourses, saveCourse, updateCourse, deleteCourse, getACourse } = require("../controllers/coursesController")
 
 const coursesRouter = require("express").Router()
-
 // get all courses
 coursesRouter.get("/", getAllCourses)
 

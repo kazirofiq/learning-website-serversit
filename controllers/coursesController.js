@@ -31,10 +31,17 @@ const getACourse = async (req, res) => {
     res.send(result || {})
 }
 
+const getACourses = async (req, res) => {
+    const result = await readOneDoc(req, coursesCollection)
+
+    res.send(result || {})
+}
+
 module.exports = {
     getAllCourses,
     saveCourse,
     updateCourse,
     deleteCourse,
     getACourse,
+    getACourses
 }

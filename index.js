@@ -5,6 +5,7 @@ const { connect } = require("./mongoDBConfig/mongoClient")
 const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
+const importantLinkRouter = require("./routes/ImportantLinkRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -27,6 +28,9 @@ connect()
 
         // videos routes
         app.use("/videos", videosRouter)
+
+        // important link routes
+        app.use("/important-link", importantLinkRouter)
     })
     .catch(err => console.log(err))
 
