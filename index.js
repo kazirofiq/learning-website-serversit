@@ -8,6 +8,7 @@ const videosRouter = require("./routes/videosRouter")
 const importantLinkRouter = require("./routes/ImportantLinkRouter")
 const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
+const couponRouter = require("./routes/Cupon")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -36,6 +37,8 @@ connect()
         // important link routes
         app.use("/important-link", importantLinkRouter)
         
+        // coupon API
+        app.use("/coupon", couponRouter)
         // admin routes
         app.use("/admin", videosRouter)
 
