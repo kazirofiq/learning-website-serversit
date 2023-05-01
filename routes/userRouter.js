@@ -1,4 +1,4 @@
-const { getAllUsers, saveUser, updateUser, deleteUser, getAUser, getAUserByUid, updateUserByUid } = require("../controllers/userController")
+const { getAllUsers, saveUser, deleteUser, getAUser, getAUserByUid, updateUserByUid } = require("../controllers/userController")
 
 const userRouter = require("express").Router()
 userRouter.get("/uid", getAUserByUid)
