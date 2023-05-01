@@ -8,6 +8,7 @@ const videosRouter = require("./routes/videosRouter")
 const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
 const couponRouter = require("./routes/couponsRouter")
+const resourceRouter = require("./routes/resourceRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -42,6 +43,8 @@ connect()
 
         // coupons routes
         app.use("/coupons", couponRouter)
+         // resource routes
+         app.use("/resource", resourceRouter)
     })
     .catch(err => console.log(err))
 

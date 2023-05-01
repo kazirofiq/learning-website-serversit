@@ -1,11 +1,10 @@
 const { resoursesCollection } = require("../mongoDBConfig/collections")
-const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../")
+const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../utils/mongoQueries")
 
 const getUploadResource = async (req, res) => {
-    const reviews = await resoursesCollection().findOne({
-        userEmail: req.params.email
-    })
-    res.send(reviews)
+    const resource = await readDoc(resoursesCollection)
+
+    res.send(resource)
 }
 
 const postUploadResource = async (req, res) => {
