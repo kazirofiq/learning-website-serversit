@@ -6,10 +6,10 @@ const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
 const jwtRouter = require("./routes/jwtRouter")
+const paymentRouter = require("./routes/paymentRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
-// const connect = getConectedClient();
 
 // middlewares
 app.use(cors())
@@ -20,6 +20,9 @@ connect()
         // users routes
         app.use("/users", userRouter)
 
+        // payment
+        app.use("/payment", paymentRouter)
+
         // courses routes
         app.use("/courses", coursesRouter)
 
@@ -28,9 +31,12 @@ connect()
 
         // videos routes
         app.use("/videos", videosRouter)
-        
+
+        // admin routes
+        app.use("/admin", videosRouter)
+
         // JWT Verify
-        app.use("/jwt",jwtRouter)
+        app.use("/jwt", jwtRouter)
     })
     .catch(err => console.log(err))
 
