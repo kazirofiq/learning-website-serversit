@@ -9,9 +9,10 @@ const importantLinkRouter = require("./routes/ImportantLinkRouter")
 const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
 const couponRouter = require("./routes/Cupon")
+const couponRouter = require("./routes/couponsRouter")
 
-const port = process.env.PORT || 5000
-const app = express()
+const port = process.env.PORT || 5000;
+const app = express();
 
 // middlewares
 app.use(cors())
@@ -19,6 +20,7 @@ app.use(express.json())
 
 connect()
     .then(() => {
+
         // users routes
         app.use("/users", userRouter)
 
@@ -44,6 +46,9 @@ connect()
 
         // JWT Verify
         app.use("/jwt", jwtRouter)
+
+        // coupons routes
+        app.use("/coupons", couponRouter)
     })
     .catch(err => console.log(err))
 

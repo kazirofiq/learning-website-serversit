@@ -3,7 +3,7 @@ const { makePayment, paymentSuccess, paymentFailure, paymentCancel, paymentIpn }
 const paymentRouter = require("express").Router()
 
 // make payment
-paymentRouter.get("/uid", makePayment)
+paymentRouter.get("/", makePayment)
 
 // payment success
 paymentRouter.post("/success", paymentSuccess)

@@ -1,5 +1,5 @@
 const SSLCommerzPayment = require('sslcommerz-lts')
-const { usersCollection } = require('../mongoDBConfig/collections')
+const { usersCollection, couponsCollection } = require('../mongoDBConfig/collections')
 const store_id = process.env.SSLCOMMERZ_STORE_ID
 const store_passwd = process.env.SSLCOMMERZ_STORE_PASS
 const server = process.env.SERVER
@@ -7,9 +7,17 @@ const is_live = true
 
 const makePayment = async (req, res) => {
     const user = await usersCollection().findOne({ uid: req.query.uid })
+
     if (user) {
+        let amount = 10000
+        const coupon = await couponsCollection().findOne({
+            value: req.query.couponId
+        })
+        if (coupon?.discount) {
+            amount = amount - amount * Number(coupon.discount) / 100
+        }
         const data = {
-            total_amount: 10,
+            total_amount: amount,
             currency: 'BDT',
             tran_id: 'REF123', // use unique tran_id for each api call
             success_url: `${server}/payment/success`,
@@ -28,7 +36,7 @@ const makePayment = async (req, res) => {
             // cus_state: 'Dhaka',
             // cus_postcode: '1000',
             // cus_country: 'Bangladesh',
-            cus_phone: user.phone || '01',
+            cus_phone: user.phone,
             // cus_fax: '01306772769',
             // ship_name: 'Customer Name',
             // ship_add1: 'Dhaka',
@@ -62,19 +70,19 @@ const paymentSuccess = async (req, res) => {
         { $set: { paidPremium: true } }
     )
     const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&')
-    res.redirect(`http://localhost:3000/payment?${queryString}`)
+    res.redirect(`https://learnwithrakib.pro/payment?${queryString}`)
 }
 
 const paymentFailure = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=failure")
+    res.redirect("https://learnwithrakib.pro/payment?status=failure")
 }
 
 const paymentCancel = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=cancelled")
+    res.redirect("https://learnwithrakib.pro/payment?status=cancelled")
 }
 
 const paymentIpn = async (req, res) => {
-    res.redirect("http://localhost:3000/payment?status=ipn")
+    res.redirect("https://learnwithrakib.pro/payment?status=ipn")
 }
 
 
