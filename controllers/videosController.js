@@ -53,7 +53,7 @@ const getVideoStatus = (req, res) => {
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        res.send(body);
+        red.send(body);
     });
 }
 

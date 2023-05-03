@@ -3,7 +3,6 @@ const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../uti
 
 const getAllUsers = async (req, res) => {
     const users = await readDoc(usersCollection)
-
     res.send(users)
 }
 
