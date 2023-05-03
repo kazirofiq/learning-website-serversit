@@ -9,7 +9,7 @@ const makePayment = async (req, res) => {
     const user = await usersCollection().findOne({ uid: req.query.uid })
 
     if (user) {
-        let amount = 10000
+        let amount = 15000
         const coupon = await couponsCollection().findOne({
             value: req.query.couponId
         })
@@ -19,7 +19,7 @@ const makePayment = async (req, res) => {
         const data = {
             total_amount: amount,
             currency: 'BDT',
-            tran_id: 'REF123', // use unique tran_id for each api call
+            tran_id: (new Date()).getTime(), // use unique tran_id for each api call
             success_url: `${server}/payment/success`,
             fail_url: `${server}/payment/failure`,
             cancel_url: `${server}/payment/cancel`,

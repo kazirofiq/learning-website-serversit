@@ -9,7 +9,9 @@ const importantLinkRouter = require("./routes/ImportantLinkRouter")
 const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
 const couponRouter = require("./routes/Cupon")
-const couponRouter = require("./routes/couponsRouter")
+const couponsRouter = require("./routes/couponsRouter")
+const adminRouter = require("./routes/adminRouter")
+const modulesRouter = require("./routes/modulesRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -38,17 +40,21 @@ connect()
 
         // important link routes
         app.use("/important-link", importantLinkRouter)
-        
+
         // coupon API
         app.use("/coupon", couponRouter)
+
         // admin routes
-        app.use("/admin", videosRouter)
+        app.use("/admin", adminRouter)
 
         // JWT Verify
         app.use("/jwt", jwtRouter)
 
         // coupons routes
-        app.use("/coupons", couponRouter)
+        app.use("/coupons", couponsRouter)
+
+        // coupons routes
+        app.use("/modules", modulesRouter)
     })
     .catch(err => console.log(err))
 
