@@ -14,10 +14,16 @@ const saveContent = async (req, res) => {
 }
 
 const saveQuiz = async (req, res) => {
-    const result = await contentsCollection().insertMany(req.body)
-    // console.log(result.insertedIds.map((id) => ({ number: id, moduleNo: req.body[i], routeName: "quiz" })));
-    console.log(result);
+    const quizData = req.body.map(quiz => ({ quizData: quiz.quiz.questions }))
+    const result = await contentsCollection().insertMany(quizData)
     const data = Object.keys(result.insertedIds).map((key, i) => ({ number: result.insertedIds[key], moduleNo: req.body[i].moduleNo, routeName: "quiz" }))
+
+    res.send(data)
+}
+
+const saveAssignment = async (req, res) => {
+    const result = await contentsCollection().insertMany(req.body)
+    const data = Object.keys(result.insertedIds).map((key, i) => ({ number: result.insertedIds[key], moduleNo: req.body[i].moduleNo, routeName: "assignment" }))
 
     res.send(data)
 }
@@ -25,5 +31,6 @@ const saveQuiz = async (req, res) => {
 module.exports = {
     saveContent,
     saveQuiz,
+    saveAssignment,
     saveModules,
 }

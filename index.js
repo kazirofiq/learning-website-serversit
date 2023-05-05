@@ -12,6 +12,7 @@ const couponRouter = require("./routes/Cupon")
 const couponsRouter = require("./routes/couponsRouter")
 const adminRouter = require("./routes/adminRouter")
 const modulesRouter = require("./routes/modulesRouter")
+const faqRouter = require("./routes/faqRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -55,6 +56,9 @@ connect()
 
         // coupons routes
         app.use("/modules", modulesRouter)
+
+        // faq routes
+        app.use("/faq", faqRouter)
     })
     .catch(err => console.log(err))
 
