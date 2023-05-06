@@ -10,6 +10,7 @@ const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
 const couponRouter = require("./routes/Cupon")
 const taskListRouter = require("./routes/taskListRouter")
+const taskListNoteRouter = require("./routes/taskListNoteRouter")
 // const couponRouter = require("./routes/couponsRouter")
 
 const port = process.env.PORT || 5000;
@@ -38,9 +39,11 @@ connect()
         app.use("/videos", videosRouter)
 
         // important link routes
-        app.use("/important-link", importantLinkRouter)
+        app.use("/important-link", importantLinkRouter);
         // My planer task list
         app.use("/task-list", taskListRouter);
+        // add task list note
+        app.use("/task-list-note", taskListNoteRouter);
         // coupon API
         app.use("/coupon", couponRouter)
         // admin routes

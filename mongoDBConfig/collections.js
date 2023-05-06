@@ -6,6 +6,7 @@ const reviewsCollection = () => client().db("lwrDB").collection("reviews")
 const ImportantLinkCollection = () => client().db("lwrDB").collection("importantLink");
 const cuponCollection = () => client().db("lwrDB").collection("coupons");
 const taskListCollections = () => client().db("lwrDB").collection("myPlanerTaskList");
+const addNoteTaskCollections = () => client().db("lwrDB").collection("addNoteTask");
 // const couponsCollection = () => client().db("lwrDB").collection("coupons")
 
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
     reviewsCollection,
     ImportantLinkCollection,
     cuponCollection,
-    taskListCollections
+    taskListCollections,
+    addNoteTaskCollections
     // couponsCollection,
 }

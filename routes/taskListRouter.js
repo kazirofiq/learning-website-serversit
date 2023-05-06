@@ -13,7 +13,7 @@ taskListRouter.post("/", saveTaskList)
 taskListRouter.patch("/:id", updateTaskList)
 
 // // delete a review by uid
-taskListRouter.delete("/:id", deleteTaskList)
+taskListRouter.delete("/:email", deleteTaskList)
 
 
 module.exports = taskListRouter
