@@ -10,6 +10,8 @@ const couponsCollection = () => client().db("lwrDB").collection("coupons")
 const modulesCollection = () => client().db("lwrDB").collection("modules")
 const contentsCollection = () => client().db("lwrDB").collection("contents")
 const faqsCollection = () => client().db("lwrDB").collection("faqs")
+const workshopsCollection = () => client().db("lwrDB").collection("workshops")
+const workshopModulesCollection = () => client().db("lwrDB").collection("workshopModules")
 
 module.exports = {
     adminsCollection,
@@ -22,4 +24,6 @@ module.exports = {
     modulesCollection,
     contentsCollection,
     faqsCollection,
+    workshopsCollection,
+    workshopModulesCollection,
 }
