@@ -14,6 +14,7 @@ const adminRouter = require("./routes/adminRouter")
 const modulesRouter = require("./routes/modulesRouter")
 const faqRouter = require("./routes/faqRouter")
 const workshopRouter = require("./routes/workshopRouter")
+const consultationRouter = require("./routes/consultationRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -63,6 +64,9 @@ connect()
 
         // workshops routes
         app.use("/workshops", workshopRouter)
+
+        // workshops routes
+        app.use("/consultation", consultationRouter)
     })
     .catch(err => console.log(err))
 

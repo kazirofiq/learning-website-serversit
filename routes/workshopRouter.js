@@ -2,25 +2,25 @@ const { saveWorkshop, saveWorkshopModule, workshopPaymentSuccess, workshopPaymen
 
 const workshopRouter = require("express").Router()
 
-// save a wokshop
+// save a workshop
 workshopRouter.post("/", saveWorkshop)
 
-// save wokshop module
+// save workshop module
 workshopRouter.post("/module", saveWorkshopModule)
 
-// save wokshop module
+// workshop payment
 workshopRouter.post("/payment/success", workshopPaymentSuccess)
 
-// save wokshop module
+// workshop payment
 workshopRouter.post("/payment/failure", workshopPaymentFailure)
 
-// save wokshop module
+// workshop payment
 workshopRouter.post("/payment/cancel", workshopPaymentCancel)
 
-// save wokshop module
+// workshop payment
 workshopRouter.post("/payment/ipn", workshopPaymentIpn)
 
-// save wokshop module
+// workshop payment
 workshopRouter.get("/payment", makeWorkshopPayment)
 
 
