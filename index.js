@@ -6,6 +6,7 @@ const coursesRouter = require("./routes/coursesRouter")
 const reviewsRouter = require("./routes/reviewsRouter")
 const videosRouter = require("./routes/videosRouter")
 const jwtRouter = require("./routes/jwtRouter")
+const modulesRouter = require("./routes/modulesRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -26,11 +27,14 @@ connect()
         // reviews routes
         app.use("/reviews", reviewsRouter)
 
+        // modules route
+        app.use("/batch-1", modulesRouter)
+
         // videos routes
         app.use("/videos", videosRouter)
-        
+
         // JWT Verify
-        app.use("/jwt",jwtRouter)
+        app.use("/jwt", jwtRouter)
     })
     .catch(err => console.log(err))
 

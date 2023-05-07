@@ -10,4 +10,5 @@ videosRouter.get("/status/:id", getVideoStatus)
 
 videosRouter.get("/:id", getAVideo)
 
+
 module.exports = videosRouter
