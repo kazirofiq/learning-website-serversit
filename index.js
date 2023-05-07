@@ -9,6 +9,7 @@ const jwtRouter = require("./routes/jwtRouter")
 const paymentRouter = require("./routes/paymentRouter")
 const couponRouter = require("./routes/couponsRouter")
 const resourceRouter = require("./routes/resourceRouter")
+const dwonloadLimitRouter = require("./routes/downloadLimitRouter")
 
 const port = process.env.PORT || 5000
 const app = express()
@@ -21,7 +22,7 @@ connect()
     .then(() => {
 
         // users routes
-        app.use("/users", userRouter)
+        app.use("/users", userRouter) 
 
         // payment
         app.use("/payment", paymentRouter)
@@ -44,7 +45,13 @@ connect()
         // coupons routes
         app.use("/coupons", couponRouter)
          // resource routes
-         app.use("/resource", resourceRouter)
+        app.use("/resource", resourceRouter)
+        app.use("/downLimit", dwonloadLimitRouter)
+       
+        
+        
+         
+        
     })
     .catch(err => console.log(err))
 

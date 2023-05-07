@@ -1,8 +1,13 @@
-const {getUploadResource, postUploadResource } = require("../controllers/uploadResourceController")
+const {getUploadResource, postUploadResource ,getSameCategoryResouce } = require("../controllers/uploadResourceController")
 const resourceRouter = require("express").Router()
+
 // get all resources
 resourceRouter.get("/", getUploadResource)
 // Post all resources
-resourceRouter.get("/", postUploadResource)
+resourceRouter.post("/", postUploadResource)
+resourceRouter.get("/:id", getSameCategoryResouce)
+// resourceRouter.get("/licencedId/:id", getAUserByPremium)
+
+
 
 module.exports = resourceRouter

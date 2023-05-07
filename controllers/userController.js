@@ -43,7 +43,7 @@ const getAUser = async (req, res) => {
 }
 const getAUserByUid = async (req, res) => {
     const result = await usersCollection().findOne({
-        uid: req.query.uid
+        downloadDate: req.query.downloadDate
     })
 
     res.send(result || {})
