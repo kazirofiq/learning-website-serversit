@@ -1,5 +1,5 @@
 const SSLCommerzPayment = require('sslcommerz-lts')
-const { createDoc } = require("../utils/mongoQueries")
+const { createDoc, readDoc, readOneDoc } = require("../utils/mongoQueries")
 const { usersCollection, workshopsCollection, workshopModulesCollection } = require("../mongoDBConfig/collections")
 
 const store_id = process.env.SSLCOMMERZ_STORE_ID
@@ -7,9 +7,18 @@ const store_passwd = process.env.SSLCOMMERZ_STORE_PASS
 const server = process.env.SERVER
 const is_live = true
 
+
+const getAllWorkshop = async (req, res) => {
+    const result = await readDoc(workshopsCollection)
+    res.send(result)
+}
+
+const getAWorkshops = async (req, res) => {
+    const result = await readOneDoc(req, workshopsCollection)
+    res.send(result)
+}
 const saveWorkshop = async (req, res) => {
     const result = await createDoc(req, workshopsCollection)
-
     res.send(result)
 }
 
@@ -87,4 +96,6 @@ module.exports = {
     workshopPaymentFailure,
     workshopPaymentCancel,
     workshopPaymentIpn,
+    getAllWorkshop,
+    getAWorkshops,
 }

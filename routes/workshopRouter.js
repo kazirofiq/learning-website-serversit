@@ -1,6 +1,7 @@
-const { saveWorkshop, saveWorkshopModule, workshopPaymentSuccess, workshopPaymentFailure, workshopPaymentCancel, workshopPaymentIpn, makeWorkshopPayment } = require("../controllers/workshopController")
+const { saveWorkshop, saveWorkshopModule, workshopPaymentSuccess, workshopPaymentFailure, workshopPaymentCancel, workshopPaymentIpn, makeWorkshopPayment, getAllWorkshop, getAWorkshops } = require("../controllers/workshopController")
 
 const workshopRouter = require("express").Router()
+
 
 // save a workshop
 workshopRouter.post("/", saveWorkshop)
@@ -22,6 +23,11 @@ workshopRouter.post("/payment/ipn", workshopPaymentIpn)
 
 // workshop payment
 workshopRouter.get("/payment", makeWorkshopPayment)
+
+workshopRouter.get("/", getAllWorkshop)
+
+workshopRouter.get("/:id", getAWorkshops)
+
 
 
 module.exports = workshopRouter
