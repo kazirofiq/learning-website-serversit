@@ -52,7 +52,9 @@ connect()
 
         // coupon API
         app.use("/coupon", couponRouter)
-
+        app.use("/task-list", taskListRouter);
+        // add task list note
+        app.use("/task-list-note", taskListNoteRouter);
         // admin routes
         app.use("/admin", adminRouter)
 
