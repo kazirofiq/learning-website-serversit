@@ -15,6 +15,7 @@ const modulesRouter = require("./routes/modulesRouter")
 const faqRouter = require("./routes/faqRouter")
 const workshopRouter = require("./routes/workshopRouter")
 const consultationRouter = require("./routes/consultationRouter")
+// const modulesRouter = require("./routes/modulesRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -37,6 +38,9 @@ connect()
 
         // reviews routes
         app.use("/reviews", reviewsRouter)
+
+        // modules route
+        app.use("/batch-1", modulesRouter)
 
         // videos routes
         app.use("/videos", videosRouter)

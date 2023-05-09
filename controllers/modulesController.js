@@ -1,5 +1,22 @@
 const { contentsCollection, modulesCollection } = require("../mongoDBConfig/collections")
-const { createDoc } = require("../utils/mongoQueries")
+const { createDoc, readDoc } = require("../utils/mongoQueries")
+const { ObjectId } = require("mongodb")
+
+const getAllModules = async (req, res) => {
+    const modules = await readDoc(modulesCollection)
+    res.send(modules)
+}
+
+const getAllContents = async (req, res) => {
+    const contents = await readDoc(contentsCollection)
+    res.send(contents)
+}
+
+const getContent = async (req, res) => {
+    const id = (req.params.number)
+    const result = await contentsCollection().findOne({ _id: new ObjectId(id) })
+    res.send(result)
+}
 
 const saveModules = async (req, res) => {
     const result = await modulesCollection().insertMany(req.body)
@@ -33,4 +50,7 @@ module.exports = {
     saveQuiz,
     saveAssignment,
     saveModules,
+    getAllModules,
+    getAllContents,
+    getContent,
 }
