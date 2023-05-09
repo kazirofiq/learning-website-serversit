@@ -41,9 +41,8 @@ const getAUser = async (req, res) => {
     res.send(result || {})
 }
 const getAUserByUid = async (req, res) => {
-    const result = await usersCollection().findOne({
-        uid: req.query.uid
-    })
+    const query = req.query.downloadDate ? { downloadDate: req.query.downloadDate } : req.query.uid ? { uid: req.query.uid } : { [Object.keys(req.query)[0]]: [req.query[Object.keys(req.query)[0]]] }
+    const result = await usersCollection().findOne(query)
 
     res.send(result || {})
 }

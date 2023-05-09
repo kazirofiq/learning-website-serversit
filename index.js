@@ -16,6 +16,8 @@ const faqRouter = require("./routes/faqRouter")
 const workshopRouter = require("./routes/workshopRouter")
 const consultationRouter = require("./routes/consultationRouter")
 // const modulesRouter = require("./routes/modulesRouter")
+const resourceRouter = require("./routes/resourceRouter")
+const dwonloadLimitRouter = require("./routes/downloadLimitRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -71,6 +73,11 @@ connect()
 
         // workshops routes
         app.use("/consultation", consultationRouter)
+
+        // resource routes
+        app.use("/resource", resourceRouter)
+        app.use("/downLimit", dwonloadLimitRouter)
+
     })
     .catch(err => console.log(err))
 
