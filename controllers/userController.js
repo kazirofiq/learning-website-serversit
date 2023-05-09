@@ -3,6 +3,16 @@ const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../uti
 
 const getAllUsers = async (req, res) => {
     const users = await readDoc(usersCollection)
+    // const r = await usersCollection().updateMany({ paidPremium: true }, {
+    //     $set: {
+    //         enrolledCourses: [
+    //             {
+    //                 id: "6454e5e7e4b19a51a8765225",
+    //                 completed: 0
+    //             }
+    //         ]
+    //     }
+    // })
     res.send(users)
 }
 

@@ -18,6 +18,8 @@ const consultationRouter = require("./routes/consultationRouter")
 // const modulesRouter = require("./routes/modulesRouter")
 const resourceRouter = require("./routes/resourceRouter")
 const dwonloadLimitRouter = require("./routes/downloadLimitRouter")
+const taskListNoteRouter = require("./routes/taskListNoteRouter")
+const taskListRouter = require("./routes/taskListRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -52,6 +54,7 @@ connect()
 
         // coupon API
         app.use("/coupon", couponRouter)
+
         app.use("/task-list", taskListRouter);
         // add task list note
         app.use("/task-list-note", taskListNoteRouter);
@@ -78,6 +81,7 @@ connect()
 
         // resource routes
         app.use("/resource", resourceRouter)
+
         app.use("/downLimit", dwonloadLimitRouter)
 
     })
