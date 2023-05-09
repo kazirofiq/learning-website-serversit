@@ -1,5 +1,6 @@
 const fs = require("fs");
 const request = require("request");
+
 // require("dotenv").config()
 
 const uploadVideo = (req, res) => {
@@ -53,7 +54,7 @@ const getVideoStatus = (req, res) => {
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
-        red.send(body);
+        res.send(body);
     });
 }
 
@@ -73,10 +74,11 @@ const getAVideo = (req, res) => {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        console.log(body);
+        // console.log(body);
         res.send(body)
     });
 }
+
 
 module.exports = {
     uploadVideo,

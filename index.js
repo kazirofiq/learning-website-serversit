@@ -12,6 +12,14 @@ const couponRouter = require("./routes/Cupon")
 const couponsRouter = require("./routes/couponsRouter")
 const adminRouter = require("./routes/adminRouter")
 const modulesRouter = require("./routes/modulesRouter")
+const faqRouter = require("./routes/faqRouter")
+const workshopRouter = require("./routes/workshopRouter")
+const consultationRouter = require("./routes/consultationRouter")
+// const modulesRouter = require("./routes/modulesRouter")
+const resourceRouter = require("./routes/resourceRouter")
+const dwonloadLimitRouter = require("./routes/downloadLimitRouter")
+const taskListNoteRouter = require("./routes/taskListNoteRouter")
+const taskListRouter = require("./routes/taskListRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -35,6 +43,9 @@ connect()
         // reviews routes
         app.use("/reviews", reviewsRouter)
 
+        // modules route
+        app.use("/batch-1", modulesRouter)
+
         // videos routes
         app.use("/videos", videosRouter)
 
@@ -44,6 +55,9 @@ connect()
         // coupon API
         app.use("/coupon", couponRouter)
 
+        app.use("/task-list", taskListRouter);
+        // add task list note
+        app.use("/task-list-note", taskListNoteRouter);
         // admin routes
         app.use("/admin", adminRouter)
 
@@ -55,6 +69,21 @@ connect()
 
         // coupons routes
         app.use("/modules", modulesRouter)
+
+        // faq routes
+        app.use("/faq", faqRouter)
+
+        // workshops routes
+        app.use("/workshops", workshopRouter)
+
+        // workshops routes
+        app.use("/consultation", consultationRouter)
+
+        // resource routes
+        app.use("/resource", resourceRouter)
+
+        app.use("/downLimit", dwonloadLimitRouter)
+
     })
     .catch(err => console.log(err))
 

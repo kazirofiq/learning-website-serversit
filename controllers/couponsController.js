@@ -1,14 +1,14 @@
-const { couponsCollection } = require("../mongoDBConfig/collections")
+// const { couponsCollection } = require("../mongoDBConfig/collections")
 
-const getACoupon = async (req, res) => {
-    const coupon = await couponsCollection().findOne({
-        value: req.query.couponId
-    })
+// const getACoupon = async (req, res) => {
+//     const coupon = await couponsCollection().findOne({
+//         value: req.query.couponId
+//     })
 
-    res.send(coupon || {})
-}
+//     res.send(coupon || {})
+// }
 
 
-module.exports = {
-    getACoupon,
-}
+// module.exports = {
+//     getACoupon,
+// }

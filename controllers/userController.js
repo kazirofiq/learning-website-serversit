@@ -3,6 +3,16 @@ const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../uti
 
 const getAllUsers = async (req, res) => {
     const users = await readDoc(usersCollection)
+    // const r = await usersCollection().updateMany({ paidPremium: true }, {
+    //     $set: {
+    //         enrolledCourses: [
+    //             {
+    //                 id: "6454e5e7e4b19a51a8765225",
+    //                 completed: 0
+    //             }
+    //         ]
+    //     }
+    // })
     res.send(users)
 }
 
@@ -41,9 +51,8 @@ const getAUser = async (req, res) => {
     res.send(result || {})
 }
 const getAUserByUid = async (req, res) => {
-    const result = await usersCollection().findOne({
-        uid: req.query.uid
-    })
+    const query = req.query.downloadDate ? { downloadDate: req.query.downloadDate } : req.query.uid ? { uid: req.query.uid } : { [Object.keys(req.query)[0]]: [req.query[Object.keys(req.query)[0]]] }
+    const result = await usersCollection().findOne(query)
 
     res.send(result || {})
 }

@@ -1,4 +1,5 @@
 const { reviewsCollection } = require("../mongoDBConfig/collections")
+const { userController } = require("../mongoDBConfig/collections")
 const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../utils/mongoQueries")
 
 const getAllReviews = async (req, res) => {
