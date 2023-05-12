@@ -21,6 +21,7 @@ const dwonloadLimitRouter = require("./routes/downloadLimitRouter")
 const taskListNoteRouter = require("./routes/taskListNoteRouter")
 const taskListRouter = require("./routes/taskListRouter")
 const resultRouter = require("./routes/resultRouter")
+const assignmentRouter = require("./routes/assignmentRouter")
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -86,6 +87,8 @@ connect()
         app.use("/downLimit", dwonloadLimitRouter)
 
         app.use("/result", resultRouter)
+
+        app.use("/assignment", assignmentRouter)
 
     })
     .catch(err => console.log(err))
