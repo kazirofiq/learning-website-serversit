@@ -28,6 +28,12 @@ const saveWorkshopModule = async (req, res) => {
     res.send(result)
 }
 
+const getWorkshopContent = async (req, res) => {
+    const id = req.params.id;
+    const result = await workshopModulesCollection().findOne({ workshopId: id })
+    res.send(result)
+}
+
 // workshop Payment
 const makeWorkshopPayment = async (req, res) => {
     const user = await usersCollection().findOne({ uid: req.query.uid })
@@ -88,6 +94,7 @@ const workshopPaymentIpn = async (req, res) => {
     res.redirect("https://learnwithrakib.pro/upcomingdetails?status=ipn")
 }
 
+
 module.exports = {
     saveWorkshop,
     saveWorkshopModule,
@@ -98,4 +105,5 @@ module.exports = {
     workshopPaymentIpn,
     getAllWorkshop,
     getAWorkshops,
+    getWorkshopContent,
 }
