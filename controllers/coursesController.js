@@ -1,4 +1,4 @@
-const { coursesCollection } = require("../mongoDBConfig/collections")
+const { coursesCollection, usersCollection, courseCompletedCollection } = require("../mongoDBConfig/collections")
 const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../utils/mongoQueries")
 
 const getAllCourses = async (req, res) => {
@@ -37,11 +37,30 @@ const getACourses = async (req, res) => {
     res.send(result || {})
 }
 
+const courseComplete = async (req, res) => {
+    const { uid, courseId } = req.query
+    const result = await usersCollection().updateOne(
+        { uid, "enrolledCourses.id": courseId },
+        { $set: { 'enrolledCourses.$.completed': req.body.newCompleted } }
+    )
+
+    const result2 = await courseCompletedCollection().updateOne(
+        { uid, courseId },
+        {
+            $set: { lessonId: req.body.lessonId }
+        },
+        { upsert: true }
+    )
+
+    res.send(result2)
+}
+
 module.exports = {
     getAllCourses,
     saveCourse,
     updateCourse,
     deleteCourse,
     getACourse,
-    getACourses
+    getACourses,
+    courseComplete,
 }

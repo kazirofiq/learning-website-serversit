@@ -17,6 +17,8 @@ const workshopsCollection = () => client().db("lwrDB").collection("workshops")
 const workshopModulesCollection = () => client().db("lwrDB").collection("workshopModules")
 const resoursesCollection = () => client().db("lwrDB").collection("resources")
 const resoursesDownLimitCollection = () => client().db("lwrDB").collection("resourcesDownload")
+const courseCompletedCollection = () => client().db("lwrDB").collection("courseCompleted")
+const resultsCollection = () => client().db("lwrDB").collection("results")
 
 module.exports = {
     adminsCollection,
@@ -35,5 +37,7 @@ module.exports = {
     workshopsCollection,
     workshopModulesCollection,
     resoursesCollection,
-    resoursesDownLimitCollection
+    resoursesDownLimitCollection,
+    courseCompletedCollection,
+    resultsCollection,
 }
