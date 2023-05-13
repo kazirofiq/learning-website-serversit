@@ -21,7 +21,6 @@ const getAllAssignment = async (req, res) => {
                 },
             },
             {
-
                 $project: {
                     _id: 0,
                     studentUid: "$_id.studentUid",
@@ -45,7 +44,7 @@ const updateAssignmentMark = async (req, res) => {
     const { studentUid, moduleNo, courseId } = req.query
     const result = await resultsCollection().updateOne(
         { studentUid, moduleNo: Number(moduleNo), courseId, resultOf: "assignment" },
-        { $set: { "marks": req.body.marks } }
+        { $set: { "marks": req.body.marks, "isChecked": req.body.isChecked } }
     )
 
     res.send(result)
