@@ -69,6 +69,17 @@ const paymentSuccess = async (req, res) => {
         { uid: req.app.get('data').uid },
         { $set: { paidPremium: true } },
     )
+    const result2 = await usersCollection().updateOne(
+        { uid: req.app.get('data').uid },
+        {
+            $push: {
+                enrolledCourses: {
+                    id: "645ff25bde9557c4b0ab4afb",
+                    completed: 0
+                }
+            }
+        },
+    )
     const queryString = Object.keys(data).map(key => key + '=' + data[key]).join('&')
     res.redirect(`https://learnwithrakib.pro/payment?${queryString}`)
 }

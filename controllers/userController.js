@@ -16,6 +16,11 @@ const getAllUsers = async (req, res) => {
     res.send(users)
 }
 
+const getAllPaidUsers = async (req, res) => {
+    const users = await usersCollection().find({ paidPremium: true }).toArray()
+    res.send(users)
+}
+
 const saveUser = async (req, res) => {
     const result = await createDoc(req, usersCollection)
     res.send(result)
@@ -65,4 +70,5 @@ module.exports = {
     getAUser,
     getAUserByUid,
     updateUserByUid,
+    getAllPaidUsers,
 }

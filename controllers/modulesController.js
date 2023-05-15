@@ -1,9 +1,19 @@
 const { contentsCollection, modulesCollection } = require("../mongoDBConfig/collections")
-const { createDoc, readDoc } = require("../utils/mongoQueries")
+const { createDoc, readDoc, updateDoc } = require("../utils/mongoQueries")
 const { ObjectId } = require("mongodb")
 
 const getAllModules = async (req, res) => {
     const modules = await readDoc(modulesCollection)
+    res.send(modules)
+}
+
+const getLastModuleNo = async (req, res) => {
+    const modules = await modulesCollection().find({ courseId: req.params.id }).sort({ "moduleNo": -1 }).limit(1).toArray()
+    res.send({ moduleNo: modules[0]?.moduleNo })
+}
+
+const getAllModulesInCourse = async (req, res) => {
+    const modules = await modulesCollection().find({ courseId: req.params.id }).sort({ "moduleNo": 1 }).toArray()
     res.send(modules)
 }
 
@@ -26,6 +36,12 @@ const saveModules = async (req, res) => {
 
 const saveContent = async (req, res) => {
     const result = await createDoc(req, contentsCollection)
+
+    res.send(result)
+}
+
+const updateModule = async (req, res) => {
+    const result = await updateDoc(req, modulesCollection)
 
     res.send(result)
 }
@@ -53,4 +69,7 @@ module.exports = {
     getAllModules,
     getAllContents,
     getContent,
+    getLastModuleNo,
+    getAllModulesInCourse,
+    updateModule,
 }

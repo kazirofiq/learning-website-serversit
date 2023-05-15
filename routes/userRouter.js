@@ -1,4 +1,4 @@
-const { getAllUsers, saveUser, deleteUser, getAUser, getAUserByUid, updateUserByUid } = require("../controllers/userController")
+const { getAllUsers, saveUser, deleteUser, getAUser, getAUserByUid, updateUserByUid, getAllPaidUsers } = require("../controllers/userController")
 
 const userRouter = require("express").Router()
 
@@ -6,6 +6,8 @@ userRouter.get("/uid", getAUserByUid)
 
 // update a user by uid
 userRouter.patch("/uid", updateUserByUid)
+
+userRouter.get("/paid", getAllPaidUsers)
 
 // get all users
 userRouter.get("/", getAllUsers)

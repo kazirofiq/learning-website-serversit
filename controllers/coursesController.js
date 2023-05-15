@@ -2,8 +2,13 @@ const { coursesCollection, usersCollection, courseCompletedCollection } = requir
 const { readDoc, createDoc, updateDoc, deleteDoc, readOneDoc } = require("../utils/mongoQueries")
 
 const getAllCourses = async (req, res) => {
-    const courses = await readDoc(coursesCollection)
+    const { draft } = req.query
+    if (draft) {
+        const courses = await coursesCollection().find({ draft: (draft === 'true') }).toArray()
+        return res.send(courses)
+    }
 
+    const courses = await readDoc(coursesCollection)
     res.send(courses)
 }
 

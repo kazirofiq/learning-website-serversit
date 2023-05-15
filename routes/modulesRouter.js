@@ -1,4 +1,4 @@
-const { saveContent, saveQuiz, saveModules, saveAssignment, getAllModules, getAllContents, getContent } = require("../controllers/modulesController")
+const { saveContent, saveQuiz, saveModules, saveAssignment, getAllModules, getAllContents, getContent, getLastModuleNo, getAllModulesInCourse, updateModule } = require("../controllers/modulesController")
 
 const modulesRouter = require("express").Router()
 
@@ -22,6 +22,15 @@ modulesRouter.get("/:number", getContent)
 
 // get all modules
 modulesRouter.get("/", getAllModules)
+
+// get all modules in a course
+modulesRouter.post("/module/:id", updateModule)
+
+// get all modules in a course
+modulesRouter.get("/course/:id", getAllModulesInCourse)
+
+// get last module no in a course
+modulesRouter.get("/no/:id", getLastModuleNo)
 
 
 module.exports = modulesRouter
