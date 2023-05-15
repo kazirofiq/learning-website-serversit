@@ -29,7 +29,6 @@ module.exports = {
     cuponCollection,
     taskListCollections,
     addNoteTaskCollections,
-    // couponsCollection,
     couponsCollection,
     modulesCollection,
     contentsCollection,
