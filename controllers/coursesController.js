@@ -44,20 +44,31 @@ const getACourses = async (req, res) => {
 
 const courseComplete = async (req, res) => {
     const { uid, courseId } = req.query
+    const { routeName, newCompleted, lessonId } = req.body
     const result = await usersCollection().updateOne(
         { uid, "enrolledCourses.id": courseId },
-        { $set: { 'enrolledCourses.$.completed': req.body.newCompleted } }
+        { $set: { 'enrolledCourses.$.completed': newCompleted } }
     )
 
     const result2 = await courseCompletedCollection().updateOne(
-        { uid, courseId },
+        { uid, courseId, routeName },
         {
-            $set: { lessonId: req.body.lessonId }
+            $set: { lessonId: lessonId }
         },
         { upsert: true }
     )
 
     res.send(result2)
+}
+
+const continueCourse = async (req, res) => {
+    const { uid, courseId } = req.query
+    console.log(req.query);
+    const result = await courseCompletedCollection().findOne({
+        uid,
+        courseId
+    })
+    res.send(result || {})
 }
 
 module.exports = {
@@ -68,4 +79,5 @@ module.exports = {
     getACourse,
     getACourses,
     courseComplete,
+    continueCourse
 }

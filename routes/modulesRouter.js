@@ -23,7 +23,7 @@ modulesRouter.get("/:number", getContent)
 // get all modules
 modulesRouter.get("/", getAllModules)
 
-// get all modules in a course
+// update a module
 modulesRouter.post("/module/:id", updateModule)
 
 // get all modules in a course
