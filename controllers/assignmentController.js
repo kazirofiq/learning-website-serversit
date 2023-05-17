@@ -67,6 +67,7 @@ const getAssignments = async (req, res) => {
     res.send(result)
 }
 
+
 const updateAssignmentMark = async (req, res) => {
     console.log(req.query);
     const { studentUid, moduleNo, courseId } = req.query
