@@ -59,6 +59,20 @@ const getVideoStatus = (req, res) => {
 }
 
 const getAVideo = (req, res) => {
+    const watermark = []
+    const watermarkTemplate = text => ({
+        type: "rtext",
+        text: text,
+        alpha: "0.60",
+        color: "0xFF0000",
+        size: "15",
+        interval: "5000",
+    })
+
+    const { name, email } = req.query
+    name && watermark.push(watermarkTemplate(name))
+    email && watermark.push(watermarkTemplate(email))
+
     const options = {
         method: "POST",
         url: `https://dev.vdocipher.com/api/videos/${req.params.id}/otp`,
@@ -67,7 +81,10 @@ const getAVideo = (req, res) => {
             "Content-Type": "application/json",
             Authorization: `Apisecret ${process.env.VDOCIPHER_API_SECRET}`,
         },
-        body: { ttl: 300 },
+        body: {
+            ttl: 300,
+            annotate: JSON.stringify(watermark),
+        },
         json: true,
     };
 
